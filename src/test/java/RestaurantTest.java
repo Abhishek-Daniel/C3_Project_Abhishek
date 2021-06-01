@@ -18,6 +18,9 @@ import static org.hamcrest.Matchers.equalTo;
 class RestaurantTest {
     Restaurant restaurant;
 
+    //    DummyMenu is used as the menu used by user to select items
+    List<Item> dummyMenu = new ArrayList<Item>();
+
     //REFACTOR ALL THE REPEATED LINES OF CODE
     private void createTestRestaurant() {
         LocalTime openingTime = LocalTime.parse("10:30:00");
@@ -90,5 +93,36 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>ORDER Value<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+    @Test
+    public void order_value_must_sum_up_when_multiple_items_are_selected (){
+        createTestRestaurant();
+
+        dummyMenu = restaurant.getMenu();
+
+        assertEquals(388,restaurant.getOrderValue(dummyMenu));
+
+    }
+
+
+    @Test
+    public void order_value_must_reduce_when_item_is_removed (){
+        createTestRestaurant();
+
+        dummyMenu = restaurant.getMenu();
+        int total = restaurant.getOrderValue(dummyMenu);
+        int priceOfItemRemoved = dummyMenu.get(1).getPrice();
+        dummyMenu.remove(1);
+
+
+
+        assertEquals(total - priceOfItemRemoved,restaurant.getOrderValue(dummyMenu));
+
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<ORDER Value>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 }
