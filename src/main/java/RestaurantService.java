@@ -10,6 +10,7 @@ public class RestaurantService {
         //DELETE ABOVE STATEMENT AND WRITE CODE HERE
         for (Restaurant restaurant : restaurants){
             if (restaurant.getName().equals(restaurantName)){
+                restaurant.displayDetails();
                 return restaurant;
             }
         }

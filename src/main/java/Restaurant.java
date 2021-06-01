@@ -37,7 +37,7 @@ public class Restaurant {
 
     public boolean isRestaurantOpen() {
 
-       LocalTime time = LocalTime.now();
+       LocalTime time = getCurrentTime();
         int stillOpen = time.compareTo(closingTime);
         int isOpen = time.compareTo(openingTime);
         if (stillOpen < 0 && isOpen >= 0){
@@ -86,6 +86,15 @@ public class Restaurant {
 
     public String getName() {
         return name;
+    }
+
+    public int getOrderValue(List<Item> menu) {
+        int totalValueOfOrder = 0;
+        for (Item myItem : menu){
+            totalValueOfOrder += myItem.getPrice();
+
+        }
+        return totalValueOfOrder;
     }
 
 }
